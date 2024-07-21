@@ -94,15 +94,16 @@ public class KnightController : MonoBehaviour
         
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
         if (touchingDirections.isGrounded && touchingDirections.isOnWall )
         {
+            Debug.Log("FixedUpdate call Flipdirection");
             FlipDirection();
         }
         if (!damage.isHit)
         {
-            if (canMove)
+            if (canMove && touchingDirections.isGrounded)
             {
                 
                 rb.velocity = new Vector2(Mathf.Clamp(rb.velocity.x + (speed*walkDirectionVector.x*Time.fixedDeltaTime),-maxSpeed,maxSpeed), rb.velocity.y);
@@ -114,8 +115,9 @@ public class KnightController : MonoBehaviour
         }
     }
 
-    private void FlipDirection()
+    public void FlipDirection()
     {
+        Debug.Log("FlipDirection");
         if (WalkDirection == WalkableDirection.Right)
         {
             WalkDirection = WalkableDirection.Left;

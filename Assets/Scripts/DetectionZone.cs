@@ -16,17 +16,27 @@ public class DetectionZone : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("OnTriggerEnter2D");
         detectedColliders.Add(collision);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        Debug.Log("OnTriggerExit2D");
         detectedColliders.Remove(collision);
         if (detectedColliders.Count <= 0)
         {
-            NoCollidersRemain.Invoke();
+            Debug.Log("NoCollidersRemain");
+            KnightController myController= gameObject.GetComponentInParent<KnightController>();
+            if(myController !=null)
+            {
+                myController.FlipDirection();
+            }
         }
+      
     }
+
+    
 
     // Start is called before the first frame update
     void Start()

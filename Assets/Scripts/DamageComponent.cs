@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class DamageComponent : MonoBehaviour
 {
     public UnityEvent<int, Vector2> damageableHit;
+    public UnityEvent damagebleDeath;
     Animator animator;
     public int _maxhealth = 100;
 
@@ -59,6 +60,10 @@ public class DamageComponent : MonoBehaviour
         {
             _isAlive = value;
             animator.SetBool("isAlive", value);
+            if (value == false)
+            {
+                damagebleDeath.Invoke(); // Corrected to Invoke
+            }
         }
     }
 
@@ -110,13 +115,13 @@ public class DamageComponent : MonoBehaviour
 
     public bool Heal(int healthRestore)
     {
-        if(isAlive && Health < _maxhealth)
+        if (isAlive && Health < _maxhealth)
         {
-            int maxHeal = Mathf.Max(_maxhealth-Health,0);
-            int actualHeal = Mathf.Min(healthRestore,_maxhealth);
+            int maxHeal = Mathf.Max(_maxhealth - Health, 0);
+            int actualHeal = Mathf.Min(healthRestore, _maxhealth);
             Health += actualHeal;
 
-            CharacterEvents.characterHealed(gameObject,healthRestore);
+            CharacterEvents.characterHealed(gameObject, healthRestore);
             return true;
         }
         return false;

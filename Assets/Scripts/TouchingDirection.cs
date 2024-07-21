@@ -5,6 +5,7 @@ using UnityEngine;
 public class TouchingDirection : MonoBehaviour
 {
     public ContactFilter2D castFilter;
+    public ContactFilter2D castFilterWall;
     public float groundDistance = 0.05f;
     public float WallCheckDistance = 0.2f;
     public float CeilingDistance = 0.05f;
@@ -69,14 +70,15 @@ public class TouchingDirection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+		castFilterWall.SetLayerMask(LayerMask.GetMask("Wall"));
+		castFilter.SetLayerMask(LayerMask.GetMask("Ground"));
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void LateUpdate()
     {
         isGrounded = touchingCol.Cast(Vector2.down, castFilter, groundHits, groundDistance) > 0;
-        isOnWall = touchingCol.Cast(wallCheckDirection, castFilter, wallHits, WallCheckDistance) > 0;
+        isOnWall = touchingCol.Cast(wallCheckDirection, castFilterWall, wallHits, WallCheckDistance) > 0;
         isOnCeiling = touchingCol.Cast(Vector2.up, castFilter, ceilingHits, CeilingDistance) > 0;
     }
 }

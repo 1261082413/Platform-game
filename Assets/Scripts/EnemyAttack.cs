@@ -25,6 +25,7 @@ public class EnemyAttack : MonoBehaviour
         DamageComponent damage = collision.GetComponent<DamageComponent>();
         if (damage != null)
         {
+            Debug.Log("test");
             Vector2 deliveredKnockback = transform.parent.localScale.x > 0 ? knockBack : new Vector2(-knockBack.x, knockBack.y); // Corrected here
             bool gotHit = damage.Hit(attackDamage, deliveredKnockback);
         }
