@@ -67,6 +67,8 @@ public class DamageComponent : MonoBehaviour
         }
     }
 
+
+
     public bool isHit
     {
         get
@@ -82,6 +84,7 @@ public class DamageComponent : MonoBehaviour
     public void Awake()
     {
         animator = GetComponent<Animator>();
+        isAlive = true;
     }
 
     public void Update()

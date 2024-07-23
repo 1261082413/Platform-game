@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 10
-  knockBack: {x: 1, y: 0}
+  knockBack: {x: 5, y: 0}
 --- !u!1 &865186340712662597
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,7 +427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 10
-  knockBack: {x: 1, y: 0}
+  knockBack: {x: 5, y: 0}
 --- !u!1 &3614938708941263220
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,6 +884,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  damagebleDeath:
+    m_PersistentCalls:
+      m_Calls: []
   _maxhealth: 100
   _health: 100
   _isAlive: 1

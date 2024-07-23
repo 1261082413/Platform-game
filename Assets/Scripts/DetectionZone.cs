@@ -7,6 +7,8 @@ public class DetectionZone : MonoBehaviour
 {
     public UnityEvent NoCollidersRemain; 
     public List<Collider2D> detectedColliders = new List<Collider2D>();
+
+    
     Collider2D col;
 
     private void Awake()
@@ -26,15 +28,19 @@ public class DetectionZone : MonoBehaviour
         detectedColliders.Remove(collision);
         if (detectedColliders.Count <= 0)
         {
-            Debug.Log("NoCollidersRemain");
+           Debug.Log("NoCollidersRemain");
+           /*
             KnightController myController= gameObject.GetComponentInParent<KnightController>();
             if(myController !=null)
             {
                 myController.FlipDirection();
-            }
+            }*/
+            NoCollidersRemain.Invoke();
         }
       
     }
+
+    
 
     
 

@@ -11,7 +11,7 @@ public class FlyingEyeController : MonoBehaviour
     Rigidbody2D rb;
     DamageComponent damage;
     Transform nextWayPoint;
-    int wayPointNum = 0;
+   public int wayPointNum = 0;
 
     public bool _hasTarget = false;
     public float wayPointReachedDistance;
@@ -95,8 +95,10 @@ public class FlyingEyeController : MonoBehaviour
         }
     }
 
+
     private void UpdateDirection()
     {
+        
         Vector3 locScale = transform.localScale; // Corrected to localScale
         if (transform.localScale.x > 0)
         {
@@ -116,13 +118,13 @@ public class FlyingEyeController : MonoBehaviour
         {
             if (rb.velocity.x > 0)
             {
-                transform.localScale = new Vector3(1 * locScale.x, locScale.y, locScale.z); // Adjusted to flip correctly
+                transform.localScale = new Vector3(-1 * locScale.x, locScale.y, locScale.z); // Adjusted to flip correctly
             }
             else
             {
                 if (rb.velocity.x < 0)
                 {
-                    transform.localScale = new Vector3(-1 * locScale.x, locScale.y, locScale.z); // Adjusted to flip correctly
+                    transform.localScale = new Vector3(1 * locScale.x, locScale.y, locScale.z); // Adjusted to flip correctly
                 }
             }
         }
