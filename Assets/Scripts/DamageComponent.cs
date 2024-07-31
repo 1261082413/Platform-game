@@ -7,11 +7,12 @@ public class DamageComponent : MonoBehaviour
 {
     public UnityEvent<int, Vector2> damageableHit;
     public UnityEvent damagebleDeath;
+    public UnityEvent<int, int> healthChanged;
     Animator animator;
     public int _maxhealth = 100;
 
     [SerializeField]
-    public int health
+    public int MaxHealth // Added MaxHealth property
     {
         get
         {
@@ -35,6 +36,7 @@ public class DamageComponent : MonoBehaviour
         set
         {
             _health = value;
+            healthChanged?.Invoke(_health, MaxHealth); // Corrected from 'Involke'
             if (_health <= 0)
             {
                 isAlive = false;
@@ -66,8 +68,6 @@ public class DamageComponent : MonoBehaviour
             }
         }
     }
-
-
 
     public bool isHit
     {
@@ -124,7 +124,7 @@ public class DamageComponent : MonoBehaviour
             int actualHeal = Mathf.Min(healthRestore, _maxhealth);
             Health += actualHeal;
 
-            CharacterEvents.characterHealed(gameObject, healthRestore);
+            CharacterEvents.characterHealed.Invoke(gameObject, healthRestore);
             return true;
         }
         return false;
@@ -135,6 +135,4 @@ public class DamageComponent : MonoBehaviour
     {
 
     }
-
-    // Update is called once per frame
 }
